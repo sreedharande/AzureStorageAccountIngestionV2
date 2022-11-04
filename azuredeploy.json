@@ -200,7 +200,7 @@
                         "APPLICATIONINSIGHTS_CONNECTION_STRING": "[reference(resourceId('microsoft.insights/components', variables('FunctionName')), '2015-05-01').ConnectionString]",
 						"CONTAINER_NAME": "[parameters('AzureBlobStorageContainerName')]",
                         "AZURE_STORAGE_CONNECTION_STRING": "[parameters('AzureBlobStorageConnectionString')]",
-                        "AzureWebJobsStorage": "[concat('DefaultEndpointsProtocol=https;AccountName=', toLower(variables('FunctionName')),';AccountKey=',listKeys(resourceId('Microsoft.Storage/storageAccounts', toLower(variables('FunctionName'))), '2019-06-01').keys[0].value, ';EndpointSuffix=',toLower(variables('StorageSuffix')))]",                      
+                        "AzureWebJobsStorage": "[concat('DefaultEndpointsProtocol=https;AccountName=', toLower(variables('FunctionName')),';AccountKey=',listKeys(resourceId('Microsoft.Storage/storageAccounts', toLower(variables('StorageAccountName'))), '2019-06-01').keys[0].value, ';EndpointSuffix=',toLower(variables('StorageSuffix')))]",                      
                         "WORKSPACE_ID": "[parameters('MicrosoftSentinelWorkspaceId')]",
                         "SHARED_KEY": "[parameters('MicrosoftSentinelSharedKey')]",
                         "MAX_CONCURRENT_PROCESSING_FILES": "[parameters('SimultaneouslyProcessingFiles')]",
@@ -216,10 +216,10 @@
         {
             "type": "Microsoft.Storage/storageAccounts/blobServices/containers",
             "apiVersion": "2019-06-01",
-            "name": "[concat(variables('FunctionName'), '/default/azure-webjobs-hosts')]",
+            "name": "[concat(variables('StorageAccountName'), '/default/azure-webjobs-hosts')]",
             "dependsOn": [
-                "[resourceId('Microsoft.Storage/storageAccounts/blobServices', variables('FunctionName'), 'default')]",
-                "[resourceId('Microsoft.Storage/storageAccounts', variables('FunctionName'))]"
+                "[resourceId('Microsoft.Storage/storageAccounts/blobServices', variables('StorageAccountName'), 'default')]",
+                "[resourceId('Microsoft.Storage/storageAccounts', variables('StorageAccountName'))]"
             ],
             "properties": {
                 "publicAccess": "None"
@@ -228,10 +228,10 @@
         {
             "type": "Microsoft.Storage/storageAccounts/blobServices/containers",
             "apiVersion": "2019-06-01",
-            "name": "[concat(variables('FunctionName'), '/default/azure-webjobs-secrets')]",
+            "name": "[concat(variables('StorageAccountName'), '/default/azure-webjobs-secrets')]",
             "dependsOn": [
-                "[resourceId('Microsoft.Storage/storageAccounts/blobServices', variables('FunctionName'), 'default')]",
-                "[resourceId('Microsoft.Storage/storageAccounts', variables('FunctionName'))]"
+                "[resourceId('Microsoft.Storage/storageAccounts/blobServices', variables('StorageAccountName'), 'default')]",
+                "[resourceId('Microsoft.Storage/storageAccounts', variables('StorageAccountName'))]"
             ],
             "properties": {
                 "publicAccess": "None"
@@ -240,10 +240,10 @@
         {
             "type": "Microsoft.Storage/storageAccounts/fileServices/shares",
             "apiVersion": "2019-06-01",
-            "name": "[concat(variables('FunctionName'), '/default/', tolower(variables('FunctionName')))]",
+            "name": "[concat(variables('StorageAccountName'), '/default/', tolower(variables('StorageAccountName')))]",
             "dependsOn": [
-                "[resourceId('Microsoft.Storage/storageAccounts/fileServices', variables('FunctionName'), 'default')]",
-                "[resourceId('Microsoft.Storage/storageAccounts', variables('FunctionName'))]"
+                "[resourceId('Microsoft.Storage/storageAccounts/fileServices', variables('StorageAccountName'), 'default')]",
+                "[resourceId('Microsoft.Storage/storageAccounts', variables('StorageAccountName'))]"
             ],
             "properties": {
                 "shareQuota": 5120
