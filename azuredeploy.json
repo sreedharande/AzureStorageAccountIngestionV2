@@ -192,7 +192,7 @@
                         "MAX_CONCURRENT_PROCESSING_FILES": "[parameters('SimultaneouslyProcessingFiles')]",
                         "MAX_BUCKET_SIZE": "[parameters('EventsBucketSize')]",
                         "logAnalyticsUri": "[variables('LogAnaltyicsUri')]",
-                        "WEBSITE_RUN_FROM_PACKAGE": "",
+                        "WEBSITE_RUN_FROM_PACKAGE": "https://github.com/sreedharande/AzureStorageAccountIngestionV2/blob/main/StorageAccountIngestionV2.zip?raw=true",
                         "LineSeparator": "[parameters('LineSeparator')]",
 						"Custom_Table_Name": "[parameters('CustomTableName')]"
                     }
