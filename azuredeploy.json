@@ -187,13 +187,13 @@
 						"CONTAINER_NAME": "[parameters('AzureBlobStorageContainerName')]",
                         "AZURE_STORAGE_CONNECTION_STRING": "[parameters('AzureBlobStorageConnectionString')]",
                         "AzureWebJobsStorage": "[concat('DefaultEndpointsProtocol=https;AccountName=', toLower(variables('FunctionName')),';AccountKey=',listKeys(resourceId('Microsoft.Storage/storageAccounts', toLower(variables('FunctionName'))), '2019-06-01').keys[0].value, ';EndpointSuffix=',toLower(variables('StorageSuffix')))]",                      
-                        "WORKSPACE_ID": "[parameters('AzureSentinelWorkspaceId')]",
-                        "SHARED_KEY": "[parameters('AzureSentinelSharedKey')]",
+                        "WORKSPACE_ID": "[parameters('MicrosoftSentinelWorkspaceId')]",
+                        "SHARED_KEY": "[parameters('MicrosoftSentinelSharedKey')]",
                         "MAX_CONCURRENT_PROCESSING_FILES": "[parameters('SimultaneouslyProcessingFiles')]",
                         "MAX_BUCKET_SIZE": "[parameters('EventsBucketSize')]",
                         "logAnalyticsUri": "[variables('LogAnaltyicsUri')]",
                         "WEBSITE_RUN_FROM_PACKAGE": "https://github.com/sreedharande/AzureStorageAccountIngestionV2/blob/main/StorageAccountIngestionV2.zip?raw=true",
-                        "LineSeparator": "[parameters('LineSeparator')]",
+                        "LineSeparator": "[\n\r\x0b\v\x0c\f\x1c\x1d\x85\x1e\u2028\u2029]+",
 						"Custom_Table_Name": "[parameters('CustomTableName')]"
                     }
                 }
